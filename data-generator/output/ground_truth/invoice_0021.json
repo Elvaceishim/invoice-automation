@@ -1,0 +1,32 @@
+{
+  "invoice_id": 21,
+  "scenario": "total_mismatch",
+  "vendor_name": "QuickFix IT Solutions",
+  "vendor_approved": true,
+  "invoice_number": "INV-202600021",
+  "issue_date_printed": "2026-07-10",
+  "issue_date_correct": "2026-07-10",
+  "line_items": [
+    {
+      "description": "Hardware \u2014 replacement parts",
+      "quantity": 1,
+      "unit_price": 121.34,
+      "line_total": 121.34
+    },
+    {
+      "description": "Hardware \u2014 replacement parts",
+      "quantity": 3,
+      "unit_price": 179.35,
+      "line_total": 538.05
+    }
+  ],
+  "subtotal": 659.39,
+  "tax": 49.45,
+  "printed_total": 746.09,
+  "correct_total": 708.84,
+  "expected_flags": [
+    "total_mismatch"
+  ],
+  "expected_outcome": "flag_for_review",
+  "pdf_filename": "invoice_0021.pdf"
+}

@@ -1,0 +1,36 @@
+{
+  "invoice_id": 19,
+  "scenario": "clean",
+  "vendor_name": "Meridian Consulting Group",
+  "vendor_approved": true,
+  "invoice_number": "INV-202600019",
+  "issue_date_printed": "2026-07-16",
+  "issue_date_correct": "2026-07-16",
+  "line_items": [
+    {
+      "description": "Office supplies \u2014 bulk order",
+      "quantity": 5,
+      "unit_price": 33.8,
+      "line_total": 169.0
+    },
+    {
+      "description": "Office supplies \u2014 bulk order",
+      "quantity": 1,
+      "unit_price": 64.58,
+      "line_total": 64.58
+    },
+    {
+      "description": "Cloud hosting \u2014 monthly",
+      "quantity": 2,
+      "unit_price": 49.53,
+      "line_total": 99.06
+    }
+  ],
+  "subtotal": 332.64,
+  "tax": 24.95,
+  "printed_total": 357.59,
+  "correct_total": 357.59,
+  "expected_flags": [],
+  "expected_outcome": "auto_approve",
+  "pdf_filename": "invoice_0019.pdf"
+}

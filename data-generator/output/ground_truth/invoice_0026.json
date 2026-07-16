@@ -1,0 +1,38 @@
+{
+  "invoice_id": 26,
+  "scenario": "total_mismatch",
+  "vendor_name": "Vertex Office Supplies",
+  "vendor_approved": true,
+  "invoice_number": "INV-202600026",
+  "issue_date_printed": "2026-07-05",
+  "issue_date_correct": "2026-07-05",
+  "line_items": [
+    {
+      "description": "Office supplies \u2014 bulk order",
+      "quantity": 3,
+      "unit_price": 47.19,
+      "line_total": 141.57
+    },
+    {
+      "description": "Freight & logistics",
+      "quantity": 2,
+      "unit_price": 385.33,
+      "line_total": 770.66
+    },
+    {
+      "description": "Office supplies \u2014 bulk order",
+      "quantity": 6,
+      "unit_price": 65.12,
+      "line_total": 390.72
+    }
+  ],
+  "subtotal": 1302.95,
+  "tax": 97.72,
+  "printed_total": 1500.67,
+  "correct_total": 1400.67,
+  "expected_flags": [
+    "total_mismatch"
+  ],
+  "expected_outcome": "flag_for_review",
+  "pdf_filename": "invoice_0026.pdf"
+}

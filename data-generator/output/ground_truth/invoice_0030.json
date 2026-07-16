@@ -1,0 +1,44 @@
+{
+  "invoice_id": 30,
+  "scenario": "over_threshold",
+  "vendor_name": "Nimbus Cloud Services",
+  "vendor_approved": true,
+  "invoice_number": "INV-202600030",
+  "issue_date_printed": "2026-08-05",
+  "issue_date_correct": "2026-08-05",
+  "line_items": [
+    {
+      "description": "Hardware \u2014 replacement parts",
+      "quantity": 2,
+      "unit_price": 302.02,
+      "line_total": 604.04
+    },
+    {
+      "description": "Office supplies \u2014 bulk order",
+      "quantity": 3,
+      "unit_price": 53.16,
+      "line_total": 159.48
+    },
+    {
+      "description": "Consulting hours",
+      "quantity": 2,
+      "unit_price": 190.89,
+      "line_total": 381.78
+    },
+    {
+      "description": "Software license \u2014 annual",
+      "quantity": 4,
+      "unit_price": 218.4,
+      "line_total": 873.6
+    }
+  ],
+  "subtotal": 2018.9,
+  "tax": 151.42,
+  "printed_total": 2170.32,
+  "correct_total": 2170.32,
+  "expected_flags": [
+    "over_threshold"
+  ],
+  "expected_outcome": "flag_for_review",
+  "pdf_filename": "invoice_0030.pdf"
+}

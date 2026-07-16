@@ -1,0 +1,42 @@
+{
+  "invoice_id": 27,
+  "scenario": "clean",
+  "vendor_name": "QuickFix IT Solutions",
+  "vendor_approved": true,
+  "invoice_number": "INV-202600027",
+  "issue_date_printed": "2026-07-03",
+  "issue_date_correct": "2026-07-03",
+  "line_items": [
+    {
+      "description": "Office supplies \u2014 bulk order",
+      "quantity": 6,
+      "unit_price": 49.85,
+      "line_total": 299.1
+    },
+    {
+      "description": "Design services",
+      "quantity": 6,
+      "unit_price": 111.92,
+      "line_total": 671.52
+    },
+    {
+      "description": "Office supplies \u2014 bulk order",
+      "quantity": 1,
+      "unit_price": 68.7,
+      "line_total": 68.7
+    },
+    {
+      "description": "Design services",
+      "quantity": 1,
+      "unit_price": 137.49,
+      "line_total": 137.49
+    }
+  ],
+  "subtotal": 1176.81,
+  "tax": 88.26,
+  "printed_total": 1265.07,
+  "correct_total": 1265.07,
+  "expected_flags": [],
+  "expected_outcome": "auto_approve",
+  "pdf_filename": "invoice_0027.pdf"
+}

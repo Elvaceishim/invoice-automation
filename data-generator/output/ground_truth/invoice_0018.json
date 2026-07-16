@@ -1,0 +1,38 @@
+{
+  "invoice_id": 18,
+  "scenario": "unapproved_vendor",
+  "vendor_name": "Shadow Freight Co",
+  "vendor_approved": false,
+  "invoice_number": "INV-202600018",
+  "issue_date_printed": "2026-08-08",
+  "issue_date_correct": "2026-08-08",
+  "line_items": [
+    {
+      "description": "Office supplies \u2014 bulk order",
+      "quantity": 1,
+      "unit_price": 30.39,
+      "line_total": 30.39
+    },
+    {
+      "description": "Software license \u2014 annual",
+      "quantity": 1,
+      "unit_price": 351.17,
+      "line_total": 351.17
+    },
+    {
+      "description": "Software license \u2014 annual",
+      "quantity": 1,
+      "unit_price": 742.06,
+      "line_total": 742.06
+    }
+  ],
+  "subtotal": 1123.62,
+  "tax": 84.27,
+  "printed_total": 1207.89,
+  "correct_total": 1207.89,
+  "expected_flags": [
+    "unapproved_vendor"
+  ],
+  "expected_outcome": "flag_for_review",
+  "pdf_filename": "invoice_0018.pdf"
+}

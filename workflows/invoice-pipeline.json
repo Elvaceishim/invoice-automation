@@ -1,0 +1,227 @@
+{
+  "name": "Invoice AP Pipeline",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "invoice-intake",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "Invoice Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [ -800, 0 ],
+      "id": "webhook-node-01",
+      "notes": "Expects a multipart/form-data POST with the PDF under field name 'file'. Test with: curl -X POST -F file=@invoice.pdf http://localhost:5679/webhook/invoice-intake"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://invoice-extraction:8000/extract",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "file"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Extract Invoice",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [ -600, 0 ],
+      "id": "http-node-extract",
+      "notes": "UNVERIFIED: this node's binary-file multipart configuration could not be tested against a live n8n instance. If it errors on import or execution, open it in the UI and manually confirm the Body Parameters section — the field name must be 'file' to match both the webhook's incoming binary property and the FastAPI service's expected parameter name.",
+      "onError": "continueErrorOutput",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO invoice_dead_letter (source_filename, stage, error_message)\nVALUES (\n  '{{ ($binary.file && $binary.file.fileName || \"unknown\").toString().replace(/'/g, \"''\") }}',\n  'extraction',\n  '{{ (($json.error || $json.message || JSON.stringify($json)) + \"\").toString().replace(/'/g, \"''\") }}'\n);",
+        "options": {}
+      },
+      "name": "Log Extraction Failure",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [ -600, 250 ],
+      "id": "pg-node-extract-fail",
+      "credentials": { "postgres": { "id": "1", "name": "Local Postgres" } }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"status\": \"error\", \"stage\": \"extraction\", \"message\": \"Could not read the invoice — logged for review.\" } }}",
+        "options": { "responseCode": 502 }
+      },
+      "name": "Respond - Extraction Failed",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.2,
+      "position": [ -400, 250 ],
+      "id": "respond-node-extract-fail"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://invoice-validation:8000/validate",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "name": "Validate Invoice",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [ -400, -100 ],
+      "id": "http-node-validate",
+      "notes": "Passes the extraction result straight through as the request body — the validation service's ExtractedInvoice schema matches the extraction service's ExtractionResult schema field-for-field, so no reshaping needed.",
+      "onError": "continueErrorOutput",
+      "retryOnFail": true,
+      "maxTries": 2
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO invoice_dead_letter (source_filename, stage, error_message)\nVALUES (\n  '{{ ($json.vendor_name || \"unknown\").toString().replace(/'/g, \"''\") }}',\n  'validation',\n  '{{ (($json.error || $json.message || JSON.stringify($json)) + \"\").toString().replace(/'/g, \"''\") }}'\n);",
+        "options": {}
+      },
+      "name": "Log Validation Failure",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [ -400, 150 ],
+      "id": "pg-node-validate-fail",
+      "credentials": { "postgres": { "id": "1", "name": "Local Postgres" } }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"status\": \"error\", \"stage\": \"validation\", \"message\": \"Extraction succeeded but validation failed — logged for review.\" } }}",
+        "options": { "responseCode": 502 }
+      },
+      "name": "Respond - Validation Failed",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.2,
+      "position": [ -200, 150 ],
+      "id": "respond-node-validate-fail"
+    },
+    {
+      "parameters": {
+        "jsonCode": "// Merges the extraction result (from Extract Invoice) with the\n// validation result (from Validate Invoice) into one flat record\n// ready to insert into the invoices table.\n//\n// Using .first() rather than .item — .item's pairedItem tracking can\n// break once a node in between has completely replaced the item's shape,\n// which is exactly what happens here (extraction output and validation\n// output are entirely different objects).\nconst extraction = $('Extract Invoice').first().json;\nconst validation = $input.first().json;\n\n// Capture the filename here, from the webhook node directly, rather than\n// relying on binary data surviving through this Code node — Code nodes\n// don't forward binary data automatically unless explicitly included in\n// the returned item.\nlet sourceFilename = 'unknown';\ntry {\n  const webhookItem = $('Invoice Webhook').first();\n  if (webhookItem.binary && webhookItem.binary.file) {\n    sourceFilename = webhookItem.binary.file.fileName || 'unknown';\n  }\n} catch (e) {\n  // fall back to 'unknown' — not worth failing the whole record over a filename\n}\n\nreturn [{\n  json: {\n    source_filename: sourceFilename,\n    vendor_name: extraction.vendor_name,\n    invoice_number: extraction.invoice_number,\n    issue_date: extraction.issue_date,\n    total: extraction.total,\n    outcome: validation.outcome,\n    flags: validation.flags,\n    reasons: validation.reasons,\n    extracted_data: extraction,\n  }\n}];"
+      },
+      "name": "Merge Extraction + Validation",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [ -200, -100 ],
+      "id": "code-node-merge"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO invoices (source_filename, vendor_name, invoice_number, issue_date, total, outcome, flags, reasons, extracted_data)\nVALUES (\n  '{{ $json.source_filename.toString().replace(/'/g, \"''\") }}',\n  {{ $json.vendor_name ? \"'\" + $json.vendor_name.toString().replace(/'/g, \"''\") + \"'\" : 'NULL' }},\n  {{ $json.invoice_number ? \"'\" + $json.invoice_number.toString().replace(/'/g, \"''\") + \"'\" : 'NULL' }},\n  {{ $json.issue_date ? \"'\" + $json.issue_date.toString().replace(/'/g, \"''\") + \"'\" : 'NULL' }},\n  {{ $json.total !== null && $json.total !== undefined ? $json.total : 'NULL' }},\n  '{{ $json.outcome }}',\n  '{{ JSON.stringify($json.flags).replace(/'/g, \"''\") }}'::jsonb,\n  '{{ JSON.stringify($json.reasons).replace(/'/g, \"''\") }}'::jsonb,\n  '{{ JSON.stringify($json.extracted_data).replace(/'/g, \"''\") }}'::jsonb\n)\nRETURNING id;",
+        "options": {}
+      },
+      "name": "Insert Invoice Record",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [ 0, -100 ],
+      "id": "pg-node-insert",
+      "notes": "Manually quoted/escaped rather than using n8n's built-in Query Parameters field — that field has a known bug where any value containing a comma breaks positional parameter parsing, which we hit for real in Project 1.",
+      "credentials": { "postgres": { "id": "1", "name": "Local Postgres" } }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "loose" },
+          "conditions": [
+            {
+              "leftValue": "={{$json.outcome}}",
+              "rightValue": "flag_for_review",
+              "operator": { "type": "string", "operation": "equals" }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "name": "Needs Review?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [ 200, -100 ],
+      "id": "if-node-review"
+    },
+    {
+      "parameters": {
+        "jsCode": "const inv = $('Merge Extraction + Validation').first().json;\nconst flagLines = (inv.flags || []).map(f => `• ${f}: ${inv.reasons[f] || ''}`).join('\\n');\nconst text = `🚩 Invoice needs review\\nVendor: ${inv.vendor_name || 'unknown'}\\nTotal: $${inv.total ?? 'unknown'}\\n\\n${flagLines}`;\nreturn [{ json: { text } }];"
+      },
+      "name": "Build Review Alert",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [ 400, -200 ],
+      "id": "code-node-alert"
+    },
+    {
+      "parameters": {
+        "chatId": "REPLACE_WITH_YOUR_CHAT_ID",
+        "text": "={{$json.text}}",
+        "additionalFields": {}
+      },
+      "name": "Send Review Alert",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [ 600, -200 ],
+      "id": "telegram-node-alert",
+      "credentials": { "telegramApi": { "id": "3", "name": "Telegram account" } }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"status\": \"ok\", \"outcome\": $('Merge Extraction + Validation').first().json.outcome, \"flags\": $('Merge Extraction + Validation').first().json.flags, \"reasons\": $('Merge Extraction + Validation').first().json.reasons } }}",
+        "options": {}
+      },
+      "name": "Respond - Decision",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.2,
+      "position": [ 800, -100 ],
+      "id": "respond-node-decision"
+    }
+  ],
+  "connections": {
+    "Invoice Webhook": { "main": [[{ "node": "Extract Invoice", "type": "main", "index": 0 }]] },
+    "Extract Invoice": {
+      "main": [
+        [{ "node": "Validate Invoice", "type": "main", "index": 0 }],
+        [{ "node": "Log Extraction Failure", "type": "main", "index": 0 }]
+      ]
+    },
+    "Log Extraction Failure": { "main": [[{ "node": "Respond - Extraction Failed", "type": "main", "index": 0 }]] },
+    "Validate Invoice": {
+      "main": [
+        [{ "node": "Merge Extraction + Validation", "type": "main", "index": 0 }],
+        [{ "node": "Log Validation Failure", "type": "main", "index": 0 }]
+      ]
+    },
+    "Log Validation Failure": { "main": [[{ "node": "Respond - Validation Failed", "type": "main", "index": 0 }]] },
+    "Merge Extraction + Validation": { "main": [[{ "node": "Insert Invoice Record", "type": "main", "index": 0 }]] },
+    "Insert Invoice Record": { "main": [[{ "node": "Needs Review?", "type": "main", "index": 0 }]] },
+    "Needs Review?": {
+      "main": [
+        [{ "node": "Build Review Alert", "type": "main", "index": 0 }, { "node": "Respond - Decision", "type": "main", "index": 0 }],
+        [{ "node": "Respond - Decision", "type": "main", "index": 0 }]
+      ]
+    },
+    "Build Review Alert": { "main": [[{ "node": "Send Review Alert", "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true
+  },
+  "pinData": {}
+}

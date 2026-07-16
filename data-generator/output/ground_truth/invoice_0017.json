@@ -1,0 +1,38 @@
+{
+  "invoice_id": 17,
+  "scenario": "malformed_date",
+  "vendor_name": "Nimbus Cloud Services",
+  "vendor_approved": true,
+  "invoice_number": "INV-202600017",
+  "issue_date_printed": "",
+  "issue_date_correct": "2026-07-10",
+  "line_items": [
+    {
+      "description": "Office supplies \u2014 bulk order",
+      "quantity": 3,
+      "unit_price": 56.31,
+      "line_total": 168.93
+    },
+    {
+      "description": "Support retainer \u2014 monthly",
+      "quantity": 1,
+      "unit_price": 228.65,
+      "line_total": 228.65
+    },
+    {
+      "description": "Consulting hours",
+      "quantity": 4,
+      "unit_price": 212.59,
+      "line_total": 850.36
+    }
+  ],
+  "subtotal": 1247.94,
+  "tax": 93.6,
+  "printed_total": 1341.54,
+  "correct_total": 1341.54,
+  "expected_flags": [
+    "malformed_date"
+  ],
+  "expected_outcome": "flag_for_review",
+  "pdf_filename": "invoice_0017.pdf"
+}

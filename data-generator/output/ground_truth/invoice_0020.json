@@ -1,0 +1,44 @@
+{
+  "invoice_id": 20,
+  "scenario": "over_threshold",
+  "vendor_name": "Nimbus Cloud Services",
+  "vendor_approved": true,
+  "invoice_number": "INV-202600020",
+  "issue_date_printed": "2026-08-06",
+  "issue_date_correct": "2026-08-06",
+  "line_items": [
+    {
+      "description": "Hardware \u2014 replacement parts",
+      "quantity": 3,
+      "unit_price": 95.22,
+      "line_total": 285.66
+    },
+    {
+      "description": "Software license \u2014 annual",
+      "quantity": 2,
+      "unit_price": 659.72,
+      "line_total": 1319.44
+    },
+    {
+      "description": "Software license \u2014 annual",
+      "quantity": 1,
+      "unit_price": 445.08,
+      "line_total": 445.08
+    },
+    {
+      "description": "Freight & logistics",
+      "quantity": 1,
+      "unit_price": 481.3,
+      "line_total": 481.3
+    }
+  ],
+  "subtotal": 2531.48,
+  "tax": 189.86,
+  "printed_total": 2721.34,
+  "correct_total": 2721.34,
+  "expected_flags": [
+    "over_threshold"
+  ],
+  "expected_outcome": "flag_for_review",
+  "pdf_filename": "invoice_0020.pdf"
+}

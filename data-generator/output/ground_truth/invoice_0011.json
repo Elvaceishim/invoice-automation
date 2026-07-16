@@ -1,0 +1,30 @@
+{
+  "invoice_id": 11,
+  "scenario": "clean",
+  "vendor_name": "Vertex Office Supplies",
+  "vendor_approved": true,
+  "invoice_number": "INV-202600011",
+  "issue_date_printed": "2026-07-25",
+  "issue_date_correct": "2026-07-25",
+  "line_items": [
+    {
+      "description": "Office supplies \u2014 bulk order",
+      "quantity": 3,
+      "unit_price": 23.11,
+      "line_total": 69.33
+    },
+    {
+      "description": "Cloud hosting \u2014 monthly",
+      "quantity": 3,
+      "unit_price": 220.62,
+      "line_total": 661.86
+    }
+  ],
+  "subtotal": 731.19,
+  "tax": 54.84,
+  "printed_total": 786.03,
+  "correct_total": 786.03,
+  "expected_flags": [],
+  "expected_outcome": "auto_approve",
+  "pdf_filename": "invoice_0011.pdf"
+}

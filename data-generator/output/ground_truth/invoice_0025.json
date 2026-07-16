@@ -1,0 +1,38 @@
+{
+  "invoice_id": 25,
+  "scenario": "missing_invoice_number",
+  "vendor_name": "Meridian Consulting Group",
+  "vendor_approved": true,
+  "invoice_number": null,
+  "issue_date_printed": "2026-08-01",
+  "issue_date_correct": "2026-08-01",
+  "line_items": [
+    {
+      "description": "Consulting hours",
+      "quantity": 6,
+      "unit_price": 173.86,
+      "line_total": 1043.16
+    },
+    {
+      "description": "Freight & logistics",
+      "quantity": 1,
+      "unit_price": 281.3,
+      "line_total": 281.3
+    },
+    {
+      "description": "Office supplies \u2014 bulk order",
+      "quantity": 2,
+      "unit_price": 40.63,
+      "line_total": 81.26
+    }
+  ],
+  "subtotal": 1405.72,
+  "tax": 105.43,
+  "printed_total": 1511.15,
+  "correct_total": 1511.15,
+  "expected_flags": [
+    "missing_invoice_number"
+  ],
+  "expected_outcome": "flag_for_review",
+  "pdf_filename": "invoice_0025.pdf"
+}

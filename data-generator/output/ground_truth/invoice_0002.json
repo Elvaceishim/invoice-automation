@@ -1,0 +1,38 @@
+{
+  "invoice_id": 2,
+  "scenario": "missing_invoice_number",
+  "vendor_name": "Meridian Consulting Group",
+  "vendor_approved": true,
+  "invoice_number": null,
+  "issue_date_printed": "2026-08-06",
+  "issue_date_correct": "2026-08-06",
+  "line_items": [
+    {
+      "description": "Freight & logistics",
+      "quantity": 1,
+      "unit_price": 214.52,
+      "line_total": 214.52
+    },
+    {
+      "description": "Cloud hosting \u2014 monthly",
+      "quantity": 3,
+      "unit_price": 167.36,
+      "line_total": 502.08
+    },
+    {
+      "description": "Consulting hours",
+      "quantity": 2,
+      "unit_price": 207.84,
+      "line_total": 415.68
+    }
+  ],
+  "subtotal": 1132.28,
+  "tax": 84.92,
+  "printed_total": 1217.2,
+  "correct_total": 1217.2,
+  "expected_flags": [
+    "missing_invoice_number"
+  ],
+  "expected_outcome": "flag_for_review",
+  "pdf_filename": "invoice_0002.pdf"
+}

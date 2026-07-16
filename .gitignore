@@ -1,0 +1,15 @@
+# Environment / secrets — never commit real credentials
+.env
+.env.local
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# OS/editor noise
+.DS_Store
+.vscode/

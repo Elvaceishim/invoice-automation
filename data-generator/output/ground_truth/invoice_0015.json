@@ -1,0 +1,38 @@
+{
+  "invoice_id": 15,
+  "scenario": "total_mismatch",
+  "vendor_name": "QuickFix IT Solutions",
+  "vendor_approved": true,
+  "invoice_number": "INV-202600015",
+  "issue_date_printed": "2026-07-19",
+  "issue_date_correct": "2026-07-19",
+  "line_items": [
+    {
+      "description": "Office supplies \u2014 bulk order",
+      "quantity": 5,
+      "unit_price": 20.63,
+      "line_total": 103.15
+    },
+    {
+      "description": "Cloud hosting \u2014 monthly",
+      "quantity": 4,
+      "unit_price": 182.4,
+      "line_total": 729.6
+    },
+    {
+      "description": "Design services",
+      "quantity": 3,
+      "unit_price": 77.51,
+      "line_total": 232.53
+    }
+  ],
+  "subtotal": 1065.28,
+  "tax": 79.9,
+  "printed_total": 1245.18,
+  "correct_total": 1145.18,
+  "expected_flags": [
+    "total_mismatch"
+  ],
+  "expected_outcome": "flag_for_review",
+  "pdf_filename": "invoice_0015.pdf"
+}

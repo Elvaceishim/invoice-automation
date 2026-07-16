@@ -1,0 +1,38 @@
+{
+  "invoice_id": 6,
+  "scenario": "missing_invoice_number",
+  "vendor_name": "QuickFix IT Solutions",
+  "vendor_approved": true,
+  "invoice_number": null,
+  "issue_date_printed": "2026-07-09",
+  "issue_date_correct": "2026-07-09",
+  "line_items": [
+    {
+      "description": "Cloud hosting \u2014 monthly",
+      "quantity": 5,
+      "unit_price": 70.0,
+      "line_total": 350.0
+    },
+    {
+      "description": "Freight & logistics",
+      "quantity": 3,
+      "unit_price": 202.13,
+      "line_total": 606.39
+    },
+    {
+      "description": "Freight & logistics",
+      "quantity": 2,
+      "unit_price": 232.81,
+      "line_total": 465.62
+    }
+  ],
+  "subtotal": 1422.01,
+  "tax": 106.65,
+  "printed_total": 1528.66,
+  "correct_total": 1528.66,
+  "expected_flags": [
+    "missing_invoice_number"
+  ],
+  "expected_outcome": "flag_for_review",
+  "pdf_filename": "invoice_0006.pdf"
+}

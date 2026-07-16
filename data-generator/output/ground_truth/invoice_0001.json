@@ -1,0 +1,30 @@
+{
+  "invoice_id": 1,
+  "scenario": "clean",
+  "vendor_name": "Nimbus Cloud Services",
+  "vendor_approved": true,
+  "invoice_number": "INV-202600001",
+  "issue_date_printed": "2026-07-07",
+  "issue_date_correct": "2026-07-07",
+  "line_items": [
+    {
+      "description": "Cloud hosting \u2014 monthly",
+      "quantity": 6,
+      "unit_price": 114.51,
+      "line_total": 687.06
+    },
+    {
+      "description": "Hardware \u2014 replacement parts",
+      "quantity": 1,
+      "unit_price": 350.81,
+      "line_total": 350.81
+    }
+  ],
+  "subtotal": 1037.87,
+  "tax": 77.84,
+  "printed_total": 1115.71,
+  "correct_total": 1115.71,
+  "expected_flags": [],
+  "expected_outcome": "auto_approve",
+  "pdf_filename": "invoice_0001.pdf"
+}

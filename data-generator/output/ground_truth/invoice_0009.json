@@ -1,0 +1,50 @@
+{
+  "invoice_id": 9,
+  "scenario": "unapproved_vendor",
+  "vendor_name": "Shadow Freight Co",
+  "vendor_approved": false,
+  "invoice_number": "INV-202600009",
+  "issue_date_printed": "2026-07-30",
+  "issue_date_correct": "2026-07-30",
+  "line_items": [
+    {
+      "description": "Office supplies \u2014 bulk order",
+      "quantity": 1,
+      "unit_price": 55.06,
+      "line_total": 55.06
+    },
+    {
+      "description": "Support retainer \u2014 monthly",
+      "quantity": 1,
+      "unit_price": 347.54,
+      "line_total": 347.54
+    },
+    {
+      "description": "Cloud hosting \u2014 monthly",
+      "quantity": 1,
+      "unit_price": 241.04,
+      "line_total": 241.04
+    },
+    {
+      "description": "Office supplies \u2014 bulk order",
+      "quantity": 1,
+      "unit_price": 28.63,
+      "line_total": 28.63
+    },
+    {
+      "description": "Hardware \u2014 replacement parts",
+      "quantity": 1,
+      "unit_price": 171.3,
+      "line_total": 171.3
+    }
+  ],
+  "subtotal": 843.57,
+  "tax": 63.27,
+  "printed_total": 906.84,
+  "correct_total": 906.84,
+  "expected_flags": [
+    "unapproved_vendor"
+  ],
+  "expected_outcome": "flag_for_review",
+  "pdf_filename": "invoice_0009.pdf"
+}

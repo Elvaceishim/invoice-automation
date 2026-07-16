@@ -1,0 +1,32 @@
+{
+  "invoice_id": 8,
+  "scenario": "malformed_date",
+  "vendor_name": "Meridian Consulting Group",
+  "vendor_approved": true,
+  "invoice_number": "INV-202600008",
+  "issue_date_printed": "15th of July",
+  "issue_date_correct": "2026-07-07",
+  "line_items": [
+    {
+      "description": "Hardware \u2014 replacement parts",
+      "quantity": 6,
+      "unit_price": 95.22,
+      "line_total": 571.32
+    },
+    {
+      "description": "Office supplies \u2014 bulk order",
+      "quantity": 3,
+      "unit_price": 23.66,
+      "line_total": 70.98
+    }
+  ],
+  "subtotal": 642.3,
+  "tax": 48.17,
+  "printed_total": 690.47,
+  "correct_total": 690.47,
+  "expected_flags": [
+    "malformed_date"
+  ],
+  "expected_outcome": "flag_for_review",
+  "pdf_filename": "invoice_0008.pdf"
+}

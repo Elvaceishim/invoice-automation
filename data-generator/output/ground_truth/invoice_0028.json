@@ -1,0 +1,32 @@
+{
+  "invoice_id": 28,
+  "scenario": "total_mismatch",
+  "vendor_name": "Nimbus Cloud Services",
+  "vendor_approved": true,
+  "invoice_number": "INV-202600028",
+  "issue_date_printed": "2026-07-14",
+  "issue_date_correct": "2026-07-14",
+  "line_items": [
+    {
+      "description": "Office supplies \u2014 bulk order",
+      "quantity": 4,
+      "unit_price": 53.83,
+      "line_total": 215.32
+    },
+    {
+      "description": "Consulting hours",
+      "quantity": 3,
+      "unit_price": 188.5,
+      "line_total": 565.5
+    }
+  ],
+  "subtotal": 780.82,
+  "tax": 58.56,
+  "printed_total": 820.98,
+  "correct_total": 839.38,
+  "expected_flags": [
+    "total_mismatch"
+  ],
+  "expected_outcome": "flag_for_review",
+  "pdf_filename": "invoice_0028.pdf"
+}

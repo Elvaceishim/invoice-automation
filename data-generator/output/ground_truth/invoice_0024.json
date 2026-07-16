@@ -1,0 +1,38 @@
+{
+  "invoice_id": 24,
+  "scenario": "total_mismatch",
+  "vendor_name": "Meridian Consulting Group",
+  "vendor_approved": true,
+  "invoice_number": "INV-202600024",
+  "issue_date_printed": "2026-07-20",
+  "issue_date_correct": "2026-07-20",
+  "line_items": [
+    {
+      "description": "Freight & logistics",
+      "quantity": 1,
+      "unit_price": 391.37,
+      "line_total": 391.37
+    },
+    {
+      "description": "Office supplies \u2014 bulk order",
+      "quantity": 3,
+      "unit_price": 38.27,
+      "line_total": 114.81
+    },
+    {
+      "description": "Support retainer \u2014 monthly",
+      "quantity": 2,
+      "unit_price": 358.26,
+      "line_total": 716.52
+    }
+  ],
+  "subtotal": 1222.7,
+  "tax": 91.7,
+  "printed_total": 1264.4,
+  "correct_total": 1314.4,
+  "expected_flags": [
+    "total_mismatch"
+  ],
+  "expected_outcome": "flag_for_review",
+  "pdf_filename": "invoice_0024.pdf"
+}

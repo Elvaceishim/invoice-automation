@@ -1,0 +1,32 @@
+{
+  "invoice_id": 23,
+  "scenario": "total_mismatch",
+  "vendor_name": "Meridian Consulting Group",
+  "vendor_approved": true,
+  "invoice_number": "INV-202600023",
+  "issue_date_printed": "2026-07-22",
+  "issue_date_correct": "2026-07-22",
+  "line_items": [
+    {
+      "description": "Support retainer \u2014 monthly",
+      "quantity": 1,
+      "unit_price": 235.16,
+      "line_total": 235.16
+    },
+    {
+      "description": "Support retainer \u2014 monthly",
+      "quantity": 5,
+      "unit_price": 177.53,
+      "line_total": 887.65
+    }
+  ],
+  "subtotal": 1122.81,
+  "tax": 84.21,
+  "printed_total": 1307.02,
+  "correct_total": 1207.02,
+  "expected_flags": [
+    "total_mismatch"
+  ],
+  "expected_outcome": "flag_for_review",
+  "pdf_filename": "invoice_0023.pdf"
+}

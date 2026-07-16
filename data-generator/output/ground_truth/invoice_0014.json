@@ -1,0 +1,32 @@
+{
+  "invoice_id": 14,
+  "scenario": "malformed_date",
+  "vendor_name": "Vertex Office Supplies",
+  "vendor_approved": true,
+  "invoice_number": "INV-202600014",
+  "issue_date_printed": "",
+  "issue_date_correct": "2026-07-08",
+  "line_items": [
+    {
+      "description": "Office supplies \u2014 bulk order",
+      "quantity": 2,
+      "unit_price": 75.84,
+      "line_total": 151.68
+    },
+    {
+      "description": "Hardware \u2014 replacement parts",
+      "quantity": 1,
+      "unit_price": 397.93,
+      "line_total": 397.93
+    }
+  ],
+  "subtotal": 549.61,
+  "tax": 41.22,
+  "printed_total": 590.83,
+  "correct_total": 590.83,
+  "expected_flags": [
+    "malformed_date"
+  ],
+  "expected_outcome": "flag_for_review",
+  "pdf_filename": "invoice_0014.pdf"
+}

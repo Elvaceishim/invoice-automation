@@ -1,0 +1,50 @@
+{
+  "invoice_id": 10,
+  "scenario": "over_threshold",
+  "vendor_name": "Meridian Consulting Group",
+  "vendor_approved": true,
+  "invoice_number": "INV-202600010",
+  "issue_date_printed": "2026-07-02",
+  "issue_date_correct": "2026-07-02",
+  "line_items": [
+    {
+      "description": "Hardware \u2014 replacement parts",
+      "quantity": 4,
+      "unit_price": 145.77,
+      "line_total": 583.08
+    },
+    {
+      "description": "Consulting hours",
+      "quantity": 4,
+      "unit_price": 82.71,
+      "line_total": 330.84
+    },
+    {
+      "description": "Cloud hosting \u2014 monthly",
+      "quantity": 3,
+      "unit_price": 113.39,
+      "line_total": 340.17
+    },
+    {
+      "description": "Consulting hours",
+      "quantity": 6,
+      "unit_price": 85.64,
+      "line_total": 513.84
+    },
+    {
+      "description": "Cloud hosting \u2014 monthly",
+      "quantity": 2,
+      "unit_price": 105.81,
+      "line_total": 211.62
+    }
+  ],
+  "subtotal": 1979.55,
+  "tax": 148.47,
+  "printed_total": 2128.02,
+  "correct_total": 2128.02,
+  "expected_flags": [
+    "over_threshold"
+  ],
+  "expected_outcome": "flag_for_review",
+  "pdf_filename": "invoice_0010.pdf"
+}

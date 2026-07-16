@@ -1,0 +1,44 @@
+{
+  "invoice_id": 3,
+  "scenario": "over_threshold",
+  "vendor_name": "Vertex Office Supplies",
+  "vendor_approved": true,
+  "invoice_number": "INV-202600003",
+  "issue_date_printed": "2026-08-03",
+  "issue_date_correct": "2026-08-03",
+  "line_items": [
+    {
+      "description": "Office supplies \u2014 bulk order",
+      "quantity": 5,
+      "unit_price": 83.45,
+      "line_total": 417.25
+    },
+    {
+      "description": "Hardware \u2014 replacement parts",
+      "quantity": 6,
+      "unit_price": 232.61,
+      "line_total": 1395.66
+    },
+    {
+      "description": "Software license \u2014 annual",
+      "quantity": 2,
+      "unit_price": 461.74,
+      "line_total": 923.48
+    },
+    {
+      "description": "Office supplies \u2014 bulk order",
+      "quantity": 5,
+      "unit_price": 86.51,
+      "line_total": 432.55
+    }
+  ],
+  "subtotal": 3168.94,
+  "tax": 237.67,
+  "printed_total": 3406.61,
+  "correct_total": 3406.61,
+  "expected_flags": [
+    "over_threshold"
+  ],
+  "expected_outcome": "flag_for_review",
+  "pdf_filename": "invoice_0003.pdf"
+}

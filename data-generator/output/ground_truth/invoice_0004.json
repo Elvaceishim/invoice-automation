@@ -1,0 +1,30 @@
+{
+  "invoice_id": 4,
+  "scenario": "clean",
+  "vendor_name": "Meridian Consulting Group",
+  "vendor_approved": true,
+  "invoice_number": "INV-202600004",
+  "issue_date_printed": "2026-07-18",
+  "issue_date_correct": "2026-07-18",
+  "line_items": [
+    {
+      "description": "Software license \u2014 annual",
+      "quantity": 1,
+      "unit_price": 833.79,
+      "line_total": 833.79
+    },
+    {
+      "description": "Freight & logistics",
+      "quantity": 1,
+      "unit_price": 357.08,
+      "line_total": 357.08
+    }
+  ],
+  "subtotal": 1190.87,
+  "tax": 89.32,
+  "printed_total": 1280.19,
+  "correct_total": 1280.19,
+  "expected_flags": [],
+  "expected_outcome": "auto_approve",
+  "pdf_filename": "invoice_0004.pdf"
+}

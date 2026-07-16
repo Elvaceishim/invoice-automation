@@ -1,0 +1,32 @@
+{
+  "invoice_id": 16,
+  "scenario": "malformed_date",
+  "vendor_name": "Nimbus Cloud Services",
+  "vendor_approved": true,
+  "invoice_number": "INV-202600016",
+  "issue_date_printed": "",
+  "issue_date_correct": "2026-08-07",
+  "line_items": [
+    {
+      "description": "Office supplies \u2014 bulk order",
+      "quantity": 4,
+      "unit_price": 53.92,
+      "line_total": 215.68
+    },
+    {
+      "description": "Design services",
+      "quantity": 3,
+      "unit_price": 111.74,
+      "line_total": 335.22
+    }
+  ],
+  "subtotal": 550.9,
+  "tax": 41.32,
+  "printed_total": 592.22,
+  "correct_total": 592.22,
+  "expected_flags": [
+    "malformed_date"
+  ],
+  "expected_outcome": "flag_for_review",
+  "pdf_filename": "invoice_0016.pdf"
+}

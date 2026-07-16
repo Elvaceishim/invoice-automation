@@ -1,0 +1,42 @@
+{
+  "invoice_id": 13,
+  "scenario": "clean",
+  "vendor_name": "QuickFix IT Solutions",
+  "vendor_approved": true,
+  "invoice_number": "INV-202600013",
+  "issue_date_printed": "2026-07-27",
+  "issue_date_correct": "2026-07-27",
+  "line_items": [
+    {
+      "description": "Office supplies \u2014 bulk order",
+      "quantity": 4,
+      "unit_price": 30.91,
+      "line_total": 123.64
+    },
+    {
+      "description": "Hardware \u2014 replacement parts",
+      "quantity": 3,
+      "unit_price": 155.08,
+      "line_total": 465.24
+    },
+    {
+      "description": "Hardware \u2014 replacement parts",
+      "quantity": 5,
+      "unit_price": 63.45,
+      "line_total": 317.25
+    },
+    {
+      "description": "Software license \u2014 annual",
+      "quantity": 1,
+      "unit_price": 368.95,
+      "line_total": 368.95
+    }
+  ],
+  "subtotal": 1275.08,
+  "tax": 95.63,
+  "printed_total": 1370.71,
+  "correct_total": 1370.71,
+  "expected_flags": [],
+  "expected_outcome": "auto_approve",
+  "pdf_filename": "invoice_0013.pdf"
+}

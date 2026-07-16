@@ -1,0 +1,38 @@
+{
+  "invoice_id": 5,
+  "scenario": "malformed_date",
+  "vendor_name": "Vertex Office Supplies",
+  "vendor_approved": true,
+  "invoice_number": "INV-202600005",
+  "issue_date_printed": "15th of July",
+  "issue_date_correct": "2026-07-16",
+  "line_items": [
+    {
+      "description": "Consulting hours",
+      "quantity": 4,
+      "unit_price": 193.12,
+      "line_total": 772.48
+    },
+    {
+      "description": "Consulting hours",
+      "quantity": 1,
+      "unit_price": 171.3,
+      "line_total": 171.3
+    },
+    {
+      "description": "Cloud hosting \u2014 monthly",
+      "quantity": 1,
+      "unit_price": 327.54,
+      "line_total": 327.54
+    }
+  ],
+  "subtotal": 1271.32,
+  "tax": 95.35,
+  "printed_total": 1366.67,
+  "correct_total": 1366.67,
+  "expected_flags": [
+    "malformed_date"
+  ],
+  "expected_outcome": "flag_for_review",
+  "pdf_filename": "invoice_0005.pdf"
+}

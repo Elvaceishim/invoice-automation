@@ -1,0 +1,38 @@
+{
+  "invoice_id": 29,
+  "scenario": "unapproved_vendor",
+  "vendor_name": "Shadow Freight Co",
+  "vendor_approved": false,
+  "invoice_number": "INV-202600029",
+  "issue_date_printed": "2026-07-21",
+  "issue_date_correct": "2026-07-21",
+  "line_items": [
+    {
+      "description": "Consulting hours",
+      "quantity": 2,
+      "unit_price": 199.4,
+      "line_total": 398.8
+    },
+    {
+      "description": "Design services",
+      "quantity": 2,
+      "unit_price": 276.7,
+      "line_total": 553.4
+    },
+    {
+      "description": "Design services",
+      "quantity": 1,
+      "unit_price": 256.42,
+      "line_total": 256.42
+    }
+  ],
+  "subtotal": 1208.62,
+  "tax": 90.65,
+  "printed_total": 1299.27,
+  "correct_total": 1299.27,
+  "expected_flags": [
+    "unapproved_vendor"
+  ],
+  "expected_outcome": "flag_for_review",
+  "pdf_filename": "invoice_0029.pdf"
+}

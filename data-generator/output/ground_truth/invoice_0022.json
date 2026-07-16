@@ -1,0 +1,38 @@
+{
+  "invoice_id": 22,
+  "scenario": "missing_invoice_number",
+  "vendor_name": "Nimbus Cloud Services",
+  "vendor_approved": true,
+  "invoice_number": null,
+  "issue_date_printed": "2026-08-04",
+  "issue_date_correct": "2026-08-04",
+  "line_items": [
+    {
+      "description": "Office supplies \u2014 bulk order",
+      "quantity": 3,
+      "unit_price": 36.71,
+      "line_total": 110.13
+    },
+    {
+      "description": "Consulting hours",
+      "quantity": 1,
+      "unit_price": 149.63,
+      "line_total": 149.63
+    },
+    {
+      "description": "Support retainer \u2014 monthly",
+      "quantity": 2,
+      "unit_price": 195.21,
+      "line_total": 390.42
+    }
+  ],
+  "subtotal": 650.18,
+  "tax": 48.76,
+  "printed_total": 698.94,
+  "correct_total": 698.94,
+  "expected_flags": [
+    "missing_invoice_number"
+  ],
+  "expected_outcome": "flag_for_review",
+  "pdf_filename": "invoice_0022.pdf"
+}

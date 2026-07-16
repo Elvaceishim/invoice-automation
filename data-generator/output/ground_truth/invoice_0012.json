@@ -1,0 +1,32 @@
+{
+  "invoice_id": 12,
+  "scenario": "missing_invoice_number",
+  "vendor_name": "Vertex Office Supplies",
+  "vendor_approved": true,
+  "invoice_number": null,
+  "issue_date_printed": "2026-07-22",
+  "issue_date_correct": "2026-07-22",
+  "line_items": [
+    {
+      "description": "Cloud hosting \u2014 monthly",
+      "quantity": 3,
+      "unit_price": 207.49,
+      "line_total": 622.47
+    },
+    {
+      "description": "Freight & logistics",
+      "quantity": 1,
+      "unit_price": 352.98,
+      "line_total": 352.98
+    }
+  ],
+  "subtotal": 975.45,
+  "tax": 73.16,
+  "printed_total": 1048.61,
+  "correct_total": 1048.61,
+  "expected_flags": [
+    "missing_invoice_number"
+  ],
+  "expected_outcome": "flag_for_review",
+  "pdf_filename": "invoice_0012.pdf"
+}

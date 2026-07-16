@@ -1,0 +1,79 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: n8n
+      POSTGRES_PASSWORD: n8n_local_pw
+      POSTGRES_DB: n8n
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      # Different host port than Project 1's postgres (5432), so both
+      # stacks can run at the same time without a port collision.
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U n8n"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  invoice-extraction:
+    build:
+      context: ./extraction-service
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+    ports:
+      - "8002:8000"
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  invoice-validation:
+    build:
+      context: ./validation-service
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8003:8000"
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  n8n:
+    image: n8nio/n8n:latest
+    restart: unless-stopped
+    environment:
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=postgres
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_DATABASE=n8n
+      - DB_POSTGRESDB_USER=n8n
+      - DB_POSTGRESDB_PASSWORD=n8n_local_pw
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - GENERIC_TIMEZONE=Africa/Lagos
+      - TZ=Africa/Lagos
+      - N8N_LOG_LEVEL=info
+    ports:
+      # Different host port than Project 1's n8n (5678), so both stacks
+      # can run at the same time without a port collision.
+      - "5679:5678"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      invoice-extraction:
+        condition: service_healthy
+      invoice-validation:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

@@ -1,0 +1,44 @@
+{
+  "invoice_id": 7,
+  "scenario": "unapproved_vendor",
+  "vendor_name": "Shadow Freight Co",
+  "vendor_approved": false,
+  "invoice_number": "INV-202600007",
+  "issue_date_printed": "2026-07-11",
+  "issue_date_correct": "2026-07-11",
+  "line_items": [
+    {
+      "description": "Consulting hours",
+      "quantity": 1,
+      "unit_price": 144.16,
+      "line_total": 144.16
+    },
+    {
+      "description": "Consulting hours",
+      "quantity": 1,
+      "unit_price": 155.27,
+      "line_total": 155.27
+    },
+    {
+      "description": "Hardware \u2014 replacement parts",
+      "quantity": 2,
+      "unit_price": 377.31,
+      "line_total": 754.62
+    },
+    {
+      "description": "Consulting hours",
+      "quantity": 2,
+      "unit_price": 131.73,
+      "line_total": 263.46
+    }
+  ],
+  "subtotal": 1317.51,
+  "tax": 98.81,
+  "printed_total": 1416.32,
+  "correct_total": 1416.32,
+  "expected_flags": [
+    "unapproved_vendor"
+  ],
+  "expected_outcome": "flag_for_review",
+  "pdf_filename": "invoice_0007.pdf"
+}
